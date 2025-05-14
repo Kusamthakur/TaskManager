@@ -1,0 +1,35 @@
+<!-- index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Task Manager</title>
+</head>
+<body class="bg-gradient-to-br from-indigo-100 to-white min-h-screen py-10 text-gray-800 font-sans">
+  <div class="max-w-4xl mx-auto bg-white/40 backdrop-blur p-6 rounded-xl shadow-lg">
+    <h1 class="text-3xl font-bold text-center mb-6">Task Manager</h1>
+    <form action="/create" method="POST" class="space-y-4 mb-6">
+      <input name="title" type="text" placeholder="Title" class="w-full p-3 rounded bg-white" required>
+      <textarea name="description" placeholder="Task description..." class="w-full p-3 rounded bg-white h-28 resize-none" required></textarea>
+      <button type="submit" class="w-full bg-indigo-500 text-white py-3 rounded hover:bg-indigo-600">Create Task</button>
+    </form>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <% tasks.forEach(task => { %>
+        <div class="bg-white/60 p-4 rounded shadow relative">
+          <h2 class="font-bold text-lg mb-1"><%= task.filename %></h2>
+          <p class="text-sm mb-2"><%= task.description %></p>
+          <div class="flex justify-between items-center text-sm">
+            <a href="/files/<%= task.filename %>" class="text-indigo-600 hover:underline">View</a>
+            <a href="/edit/<%= task.filename %>" class="text-blue-500 hover:underline">Edit</a>
+            <form action="/delete/<%= task.filename %>" method="POST" onsubmit="return confirm('Delete this task?');">
+              <button class="text-red-500 hover:underline" type="submit">Delete</button>
+            </form>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+</html>

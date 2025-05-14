@@ -1,0 +1,21 @@
+<!-- edit.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Edit <%= filename %></title>
+</head>
+<body class="bg-gradient-to-br from-indigo-100 to-white min-h-screen py-10 text-gray-800 font-sans">
+  <div class="max-w-2xl mx-auto bg-white/60 backdrop-blur p-6 rounded-xl shadow-lg">
+    <h1 class="text-2xl font-bold mb-6">Edit Task</h1>
+    <form action="/update/<%= filename %>" method="POST" class="space-y-4">
+      <input name="title" value="<%= filename.replace('.txt', '') %>" class="w-full p-3 rounded bg-white" required>
+      <textarea name="description" class="w-full p-3 rounded bg-white h-32 resize-none" required><%= content %></textarea>
+      <button type="submit" class="w-full bg-indigo-500 text-white py-3 rounded hover:bg-indigo-600">Update</button>
+    </form>
+    <a href="/" class="inline-block mt-4 text-indigo-600 hover:underline">← Back</a>
+  </div>
+</body>
+</html>
